@@ -1,47 +1,35 @@
 package com.mrfatworm.kotlinmvvm
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import com.mrfatworm.kotlinmvvm.databinding.ActivityMainBinding
-import java.lang.Exception
+import com.mrfatworm.kotlinmvvm.mvp.MvpActivity
+import com.mrfatworm.kotlinmvvm.mvvm.GuessActivity
 
-class MainActivity : AppCompatActivity(), IMvp {
+class MainActivity : AppCompatActivity() {
 
-    private var presenter = MainActivityPresenter(this)
-    private lateinit var binding: ActivityMainBinding
+    var login = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        presenter.requestUserName()
-    }
-
-    override fun receiveName(name: String) {
-        binding.tvWeight.text = name
-    }
-
-    fun bmi(view: View) {
-        try {
-            val weight = binding.edtWeight.text.toString().toFloat()
-            val height = binding.edtHeight.text.toString().toFloat()
-            val bmi = weight / (height * height)
-            Toast.makeText(this, "BMI = $bmi", Toast.LENGTH_SHORT).show()
-        }catch (e: Exception){
-            Toast.makeText(this, "You must input value", Toast.LENGTH_SHORT).show()
+        setContentView(R.layout.activity_main)
+        if (!login) {
+            Intent(this, LoginActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 
-    fun help(view: View) {
-        AlertDialog.Builder(this)
-                .setMessage("Input your height(meter) and weight")
-                .setTitle("Hint")
-                .setPositiveButton("OK", null)
-                .show()
+    fun goBmi(view: View) {
+        Intent(this, MvpActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
+
+    fun goGuess(view: View) {
+        Intent(this, GuessActivity::class.java).apply {
+            startActivity((this))
+        }
     }
 }

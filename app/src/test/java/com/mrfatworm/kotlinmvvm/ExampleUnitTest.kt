@@ -1,5 +1,7 @@
 package com.mrfatworm.kotlinmvvm
 
+import com.mrfatworm.kotlinmvvm.mvp.IMvp
+import com.mrfatworm.kotlinmvvm.mvp.MvpActivityPresenter
 import io.mockk.*
 import org.junit.After
 import org.junit.Test
@@ -42,7 +44,7 @@ class ExampleUnitTest {
     @Test
     fun testRequestUserName(){
         val view = mockk<IMvp>()//假造一個IView的空實體
-        val presenter = MainActivityPresenter(view)//我們實際測試的部份
+        val presenter = MvpActivityPresenter(view)//我們實際測試的部份
 
         //當假造的IView被呼叫到receivedUserName()，就讓它執行下去runs。
         every {

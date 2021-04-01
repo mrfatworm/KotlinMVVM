@@ -1,18 +1,16 @@
-package com.mrfatworm.kotlinmvvm
-
-import android.view.View
+package com.mrfatworm.kotlinmvvm.mvp
 
 //Model
 data class User(var firstName: String, var lastName: String)
 
 class Server{
-    fun requestName(): User{
-        return User("Lance", "Lee")
+    fun requestName(): User {
+        return User("LanceHeight", "Lee")
     }
 }
 
 //Present
-class MainActivityPresenter(private val view: IMvp){
+class MvpActivityPresenter(private val view: IMvp){
 
     fun requestUserName(){
         val user = Server().requestName()
