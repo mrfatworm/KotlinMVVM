@@ -1,6 +1,7 @@
 package com.mrfatworm.kotlinmvvm
 
 import android.app.Activity
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -12,6 +13,9 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        val userid = getSharedPreferences("atm", Context.MODE_PRIVATE)
+            .getString("PREF_USERID", "66")
+        edt_id.setText(userid)
     }
 
     fun login(view: View){
@@ -19,6 +23,10 @@ class LoginActivity : AppCompatActivity() {
         val password = edt_password.text.toString()
 
         if(userId == "lance" && password == "861209"){
+            getSharedPreferences("atm", Context.MODE_PRIVATE)
+                .edit()
+                .putString("PREF_USERID", userId)
+                .apply()
             Toast.makeText(this, "Login succeeded", Toast.LENGTH_SHORT).show()
             intent.putExtra("LOGIN_USERID", userId)
             intent.putExtra("LOGIN_PASSWD", password)

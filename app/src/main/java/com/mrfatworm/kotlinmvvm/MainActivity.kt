@@ -48,4 +48,10 @@ class MainActivity : AppCompatActivity() {
             startActivity((this))
         }
     }
+
+    fun goMaterial(view: View) {
+        Intent(this, MaterialActivity::class.java).apply {
+            startActivity(this)
+        }
+    }
 }
