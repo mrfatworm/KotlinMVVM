@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import com.mrfatworm.kotlinmvvm.mvp.MvpActivity
 import com.mrfatworm.kotlinmvvm.mvvm.GuessActivity
@@ -37,6 +39,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId ) {
+            R.id.action_contact -> {
+                Intent(this, MaterialActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
+            R.id.action_help -> {
+
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     fun goBmi(view: View) {
         Intent(this, MvpActivity::class.java).apply {
             startActivity(this)
@@ -46,12 +67,6 @@ class MainActivity : AppCompatActivity() {
     fun goGuess(view: View) {
         Intent(this, GuessActivity::class.java).apply {
             startActivity((this))
-        }
-    }
-
-    fun goMaterial(view: View) {
-        Intent(this, MaterialActivity::class.java).apply {
-            startActivity(this)
         }
     }
 }
