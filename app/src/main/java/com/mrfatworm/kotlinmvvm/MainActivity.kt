@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object{
         val RC_LOGIN = 30
+        val REQUEST_CAMERA = 50
     }
     var login = false
 
@@ -46,6 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId ) {
+            R.id.action_camera -> {
+                Intent(this, CameraActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
             R.id.action_contact -> {
                 Intent(this, MaterialActivity::class.java).apply {
                     startActivity(this)
