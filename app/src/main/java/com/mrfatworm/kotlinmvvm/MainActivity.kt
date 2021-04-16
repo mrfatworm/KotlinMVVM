@@ -47,6 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId ) {
+            R.id.action_expense ->{
+                Intent(this, ExpenseActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
             R.id.action_camera -> {
                 Intent(this, CameraActivity::class.java).apply {
                     startActivity(this)
