@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 class Expense(
     @NonNull
     @ColumnInfo(name = "dataAt")
-    var data: String,
+    var date: String,
     var info: String,
     var amount: Int) {
     @PrimaryKey(autoGenerate = true)
