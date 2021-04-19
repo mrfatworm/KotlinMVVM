@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.list_expense.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.io.BufferedReader
+import java.net.URL
 import java.util.concurrent.Executors
 
 class ExpenseActivity : AppCompatActivity() {
@@ -31,6 +33,15 @@ class ExpenseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expense)
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val reader = URL("https://atm201605.appspot.com/h")
+                    .openConnection()
+                    .getInputStream().bufferedReader()
+
+            val json = reader.use (BufferedReader::readText)
+            Log.d("Result", json)
+        }
 
         database = Room.databaseBuilder(this,
                 ExpenseDatabase::class.java, "expense.db")
@@ -68,8 +79,6 @@ class ExpenseActivity : AppCompatActivity() {
             }
         }
 
-
-
         fab.setOnClickListener {
             Executors.newSingleThreadExecutor().execute(){
                 for (expense in expenseData) {
@@ -78,6 +87,7 @@ class ExpenseActivity : AppCompatActivity() {
             }
         }
     }
+
     class ExpenseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val date = itemView.tv_date
         val info = itemView.tv_info
